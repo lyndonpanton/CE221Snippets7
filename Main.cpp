@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 
+#include "Pair.h"
+
 using namespace std;
 
 
@@ -125,6 +127,13 @@ void test_print_array_contents()
     char char_array_length = sizeof(char_array) / sizeof(char_array[0]);
 
     print_array_contents(char_array, char_array_length);
+
+    output_divider('-', 32);
+
+    Pair<string, double> item("Apple", 0.59);
+
+    cout << item.getFirst() << endl;
+    cout << item.getSecond() << endl;
 
     output_divider('-', 32);
 }
