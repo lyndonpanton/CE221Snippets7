@@ -13,11 +13,16 @@ template <class T>
 void print_array_contents(const T array[], int count);
 void test_print_array_contents();
 void test_custom_swap();
+template <class S, class T>
+void test_multiple_template_function(const S&, const T&);
+void test_template_class();
 
 int main()
 {
     test_custom_swap();
     test_print_array_contents();
+    test_template_class();
+    test_multiple_template_function("Alice", "Astronaut");
 
     return 0;
 }
@@ -129,7 +134,16 @@ void test_print_array_contents()
     print_array_contents(char_array, char_array_length);
 
     output_divider('-', 32);
+}
 
+template <class S, class T>
+void test_multiple_template_function(const S &s, const T &t)
+{
+    cout << '<' << s << ", " << t << '>' << endl;
+}
+
+void test_template_class()
+{
     Pair<string, double> item("Apple", 0.59);
 
     cout << item.getFirst() << endl;
