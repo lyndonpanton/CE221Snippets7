@@ -7,11 +7,15 @@ using namespace std;
 template <class T>
 void custom_swap(T &a, T &b);
 void output_divider(char c, int length);
+template <class T>
+void print_array_contents(const T array[], int count);
+void test_print_array_contents();
 void test_custom_swap();
 
 int main()
 {
     test_custom_swap();
+    test_print_array_contents();
 
     return 0;
 }
@@ -34,6 +38,14 @@ void output_divider(char c, int length)
         cout << c;
     }
 
+    cout << endl;
+}
+
+template <class T>
+void print_array_contents(const T array[], int count)
+{
+    for (int i = 0; i < count; i++)
+        cout << array[i] << " ";
     cout << endl;
 }
 
@@ -90,6 +102,29 @@ void test_custom_swap()
 
     cout << "g is now equal to " << g << " and h is now equal to " << h
         << "." << endl;
+
+    output_divider('-', 32);
+}
+
+void test_print_array_contents()
+{
+    // int
+    int int_array[] = { 1, 3, 5, 7, 9, 4, 2 };
+    int int_array_length = sizeof(int_array) / sizeof(int_array[0]);
+
+    print_array_contents(int_array, int_array_length);
+
+    // double
+    double double_array[] = { 3.14, 0.999, 2.56, 7.4, 1.001 };
+    double double_array_length = sizeof(double_array) / sizeof(double_array[0]);
+
+    print_array_contents(double_array, double_array_length);
+
+    // char
+    char char_array[] = { 'a', 'e', 'i', 'o', 'u' };
+    char char_array_length = sizeof(char_array) / sizeof(char_array[0]);
+
+    print_array_contents(char_array, char_array_length);
 
     output_divider('-', 32);
 }
