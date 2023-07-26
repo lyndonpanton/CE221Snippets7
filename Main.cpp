@@ -1,16 +1,18 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include "Pair.h"
 
 using namespace std;
 
-
+vector<int> array_to_vector(int[], int, int);
 template <class T>
-void custom_swap(T &a, T &b);
-void output_divider(char c, int length);
+void custom_swap(T&, T&);
+void output_divider(char, int);
 template <class T>
-void print_array_contents(const T array[], int count);
+void print_array_contents(const T[], int);
+void test_array_to_vector();
 void test_print_array_contents();
 void test_custom_swap();
 template <class S, class T>
@@ -23,8 +25,19 @@ int main()
     test_print_array_contents();
     test_template_class();
     test_multiple_template_function("Alice", "Astronaut");
+    test_array_to_vector();
 
     return 0;
+}
+
+vector<int> array_to_vector(int array[], int start, int end)
+{
+    output_divider('-', 32);
+
+    // Copy from start index (inclusive) to end index (exclusive)
+    vector<int> v(array + start, array + end);
+
+    return v;
 }
 
 template <class T>
@@ -54,6 +67,19 @@ void print_array_contents(const T array[], int count)
     for (int i = 0; i < count; i++)
         cout << array[i] << " ";
     cout << endl;
+}
+
+void test_array_to_vector()
+{
+    int my_array[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    vector<int> my_vector = array_to_vector(my_array, 2, 7);
+
+    for (int n: my_vector)
+    {
+        cout << n << endl;
+    }
+
+    output_divider('-', 32);
 }
 
 void test_custom_swap()
