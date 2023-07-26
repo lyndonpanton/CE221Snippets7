@@ -9,10 +9,12 @@ using namespace std;
 vector<int> array_to_vector(int[], int, int);
 template <class T>
 void custom_swap(T&, T&);
+void front_and_back(int[], int);
 void output_divider(char, int);
 template <class T>
 void print_array_contents(const T[], int);
 void test_array_to_vector();
+void test_front_and_back();
 void test_print_array_contents();
 void test_custom_swap();
 template <class S, class T>
@@ -26,6 +28,7 @@ int main()
     test_template_class();
     test_multiple_template_function("Alice", "Astronaut");
     test_array_to_vector();
+    test_front_and_back();
 
     return 0;
 }
@@ -46,6 +49,33 @@ void custom_swap(T &a, T &b)
     T temp = a;
     a = b;
     b = temp;
+}
+
+void front_and_back(int a[], int length)
+{
+    vector<int> v = array_to_vector(a, 0, length);
+
+    cout << v.front() << endl;
+
+    cout << v.back() << endl;
+
+    output_divider('-', 32);
+
+    v.front() = 100;
+
+    v.back() = 121;
+
+    cout << v.front() << endl;
+    cout << v.back() << endl;
+
+    output_divider('-', 32);
+
+    for (int n: v)
+    {
+        cout << n << endl;
+    }
+
+    output_divider('-', 32);
 }
 
 void output_divider(char c, int length)
@@ -78,8 +108,6 @@ void test_array_to_vector()
     {
         cout << n << endl;
     }
-
-    output_divider('-', 32);
 }
 
 void test_custom_swap()
@@ -137,6 +165,15 @@ void test_custom_swap()
         << "." << endl;
 
     output_divider('-', 32);
+}
+
+void test_front_and_back()
+{
+    int a[] = { 1, 4, 9, 16, 25, 36, 49, 64, 81 };
+
+    int length = sizeof(a) / sizeof(a[0]);
+
+    front_and_back(a, length);
 }
 
 void test_print_array_contents()
