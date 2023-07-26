@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <Windows.h>
+#include <cctype>
 
 #include "Pair.h"
 
@@ -20,15 +22,20 @@ void test_custom_swap();
 template <class S, class T>
 void test_multiple_template_function(const S&, const T&);
 void test_template_class();
+void use_range_based_for_loops();
 
 int main()
 {
+    SetConsoleOutputCP(1252);
+    SetConsoleCP(1252);
+
     test_custom_swap();
     test_print_array_contents();
     test_template_class();
     test_multiple_template_function("Alice", "Astronaut");
     test_array_to_vector();
     test_front_and_back();
+    use_range_based_for_loops();
 
     return 0;
 }
@@ -211,6 +218,53 @@ void test_template_class()
 
     cout << item.getFirst() << endl;
     cout << item.getSecond() << endl;
+
+    output_divider('-', 32);
+}
+
+void use_range_based_for_loops()
+{
+    vector<char> vowels = { 'a', 'e', 'i', 'o', 'u' };
+
+    // References are more efficient since copies are not made
+    // References also allow the mutation of values in range-based for loops
+    for (char &c: vowels)
+    {
+        c = toupper(c);
+        // cout << (char)toupper(c) << endl;
+    }
+
+    // Characters have now been modified, they would not be modified if
+    // references had not been used
+    for (char c: vowels)
+        cout << c << endl;
+
+    output_divider('-', 32);
+
+    Pair<string, double> a("Apple", 0.59);
+    Pair<string, double> b("Banana", 0.18);
+    Pair<string, double> c("Cherry", 0.22);
+    Pair<string, double> d("Date", 0.08);
+    Pair<string, double> e("Eggplant", 1.01);
+
+    vector<Pair<string, double>> v = { a, b, c, d, e };
+
+    // for (Pair<string, double> &p: v)
+    //     cout << p.getFirst() << ": £" << p.getSecond() << endl;
+
+    for (Pair<string, double> &p: v)
+        cout << p.getFirst() << ": £" << p.getSecond() << endl;
+
+    output_divider('-', 32);
+
+    vector<const char*> cc = { "Alice", "Bob", "Charlotte", "Daniel", "Ellouise", "Freddie" };
+
+    // Convert const char* values to string to allow for string methods to be
+    // used
+    for (string s: cc)
+        // Output if string contains specified character
+        if (s.find('s') != string::npos)
+            cout << s << endl;
 
     output_divider('-', 32);
 }
